@@ -12,9 +12,9 @@ pipeline {
                 echo 'Mustafa Tahran'
             }
         }
-        stage('Chicago') {
+        stage('Illinois') {
             steps {
-                echo 'Chicago'
+                echo 'Illinois'
             }
         }
         stage('passwd') {
