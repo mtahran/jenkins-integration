@@ -12,6 +12,11 @@ pipeline {
                 echo 'Mustafa Tahran'
             }
         }
+        stage('Chicago') {
+            steps {
+                echo 'Chicago'
+            }
+        }
         stage('passwd') {
             steps {
                 sh 'cat /etc/passwd'
