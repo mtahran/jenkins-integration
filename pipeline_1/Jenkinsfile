@@ -12,14 +12,9 @@ pipeline {
                 echo 'Mustafa Tahran'
             }
         }
-        stage('Illinois') {
+        stage('verify terraform') {
             steps {
-                echo 'Illinois'
-            }
-        }
-        stage('passwd') {
-            steps {
-                sh 'cat /etc/passwd'
+                sh "terraform -v"
             }
         }
     }
