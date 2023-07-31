@@ -2,19 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('terraform_ec2') {
             steps {
-                echo 'Hello World'
-            }
-        }
-        stage('Mustafa') {
-            steps {
-                echo 'Mustafa Tahran'
-            }
-        }
-        stage('verify terraform') {
-            steps {
-                sh "terraform -v"
+                sh 'terraform init'
+                sh 'terraform workspace select ${environment}'
+                sh 'terraform apply --auto=approve'
             }
         }
     }
