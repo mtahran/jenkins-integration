@@ -11,5 +11,17 @@ pipeline {
                 }
             }
         }
+
+        stage('pwd') {
+            steps {
+                sh "pwd"
+            }
+        }
+
+        stage('whoami') {
+            steps {
+                sh "whoami"
+            }
+        }
     }
 }
