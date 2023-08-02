@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('terraform_ec2') {
             steps {
-                dir(ec2) {
+                dir('ec2') {
                     echo "Running terraform init" 
+                    sh 'terraform init'
                 }
             }
         }
