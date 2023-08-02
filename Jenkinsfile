@@ -14,7 +14,9 @@ pipeline {
 
         stage('pwd') {
             steps {
-                sh "pwd"
+                dir('testfolder') {
+                  sh "pwd"
+                }
             }
         }
 
