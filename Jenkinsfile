@@ -2,33 +2,46 @@ pipeline {
     agent any
     parameters {
       choice(
-        choices: ['hello' , 'bye'],
-        description: 'Test choice',
-        name: 'select_choice'
+        choices: ['apply' , 'destory'],
+        description: 'Terraform Action Choice',
+        name: 'select_action_choice'
       )
     }
+
     stages {
-        stage('terraform_ec2') {
+        stage('terraform_init') {
             steps {
                 dir('ec2') {
-                    echo "Ready to go!"
                     echo "Running terraform init" 
                     sh 'terraform init'
                 }
             }
         }
 
-        stage('pwd') {
+        stage('terraform_validate') {
             steps {
-                dir('testfolder') {
-                  sh "pwd"
+                dir('ec2') {
+                    echo "Running terraform validate" 
+                    sh 'terraform validate'
                 }
             }
         }
 
-        stage('call_parameter') {
+        stage('terraform_plan') {
             steps {
-                echo expression { param.select_choice} 
+                dir('ec2') {
+                    echo "Running terraform plan" 
+                    sh 'terraform plan'
+                }
+            }
+        }
+
+        stage('terraform_action') {
+            steps {
+                dir('ec2') {
+                    echo "Running terraform ${param.select_choice}" 
+                    sh 'terraform "${param.select_choice}" --auto-approve'
+                }
             }
         }
     }
