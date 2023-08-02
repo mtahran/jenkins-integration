@@ -39,8 +39,8 @@ pipeline {
         stage('terraform_action') {
             steps {
                 dir('ec2') {
-                    echo "Running terraform ${param.select_choice}" 
-                    sh "terraform ${param.select_choice} --auto-approve"
+                    echo "Running terraform ${params.select_choice}" 
+                    sh "terraform ${params.select_choice} --auto-approve"
                 }
             }
         }
