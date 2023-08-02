@@ -1,6 +1,12 @@
 pipeline {
     agent any
-
+    parameters {
+      choice(
+        choices: ['hello' , 'bye'],
+        description: 'Test choice',
+        name: 'select_choice'
+      )
+    }
     stages {
         stage('terraform_ec2') {
             steps {
@@ -20,9 +26,9 @@ pipeline {
             }
         }
 
-        stage('whoami') {
+        stage('call_parameter') {
             steps {
-                sh "whoami"
+                echo expression { param.select_choice} 
             }
         }
     }
