@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('terraform_ec2') {
             steps {
-                sh 'terraform apply -destroy -auto-approve'
+                dir(ec2) {
+                    echo "Running terraform init" 
+                }
             }
         }
     }
