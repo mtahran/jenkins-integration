@@ -51,12 +51,12 @@ pipeline {
           sh "terraform ${params.SELECT_CHOICE} --auto-approve"
         }
       }
-    }
-    post {
-      success {
-          script {
-            slackSend color: 'good', message: "Mustafa's job was successful! :tada:"
-          }
+      post {
+        success {
+            script {
+              slackSend color: 'good', message: "Mustafa's job was successful! :tada:"
+            }
+        }
       }
     }
   }
