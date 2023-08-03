@@ -52,5 +52,24 @@ pipeline {
         }
       }
     }
+    // stage('slack notification') {
+    //   steps {
+    //     slackSend color: 'good', message: 'success message'
+    //     // slackSend botUser: true, 
+    //     // channel: 'builds', 
+    //     // color: '#00ff00', 
+    //     // message: 'Testing Jekins with Slack', 
+    //     // tokenCredentialId: 'slack-token'
+    //   }
+    // }
+    post {
+        success {
+            script {
+                slackSend color: 'good', message: "Mustafa's job was successful! :tada:"
+            }
+        }
+    }
   }
 }
+
+// curl -X POST -H 'Content-type: application/json' --data '{"text": "Something important"}'  https://hooks.slack.com/services/YOUR/TOKENIZED/URL
