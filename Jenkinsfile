@@ -52,5 +52,12 @@ pipeline {
         }
       }
     }
+    post {
+      success {
+          script {
+            slackSend color: 'good', message: "Mustafa's job was successful! :tada:"
+          }
+      }
+    }
   }
 }
