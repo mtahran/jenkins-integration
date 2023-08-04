@@ -54,14 +54,12 @@ pipeline {
         }
       }
     }
+  }
 
-    stage('notify-slack') {
-      steps {
-        script {
-              slackSend(color: "good", message: " Hey <@$userId> ! Pipeline GitHubIntegrate-2 passed successfully :tada:" )
-        }
+  post ('Post Actions') {
+    success {
+      echo '### Send Slack Notification ###'
+      slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's 'Pipeline GitHubIntegrate-2' passed successfully :tada:" )
       }
-    }
-
   }
 }
