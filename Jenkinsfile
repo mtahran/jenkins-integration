@@ -14,7 +14,7 @@ pipeline {
   stages{
     stage('tf-init') {
       when {
-        branch 'main'
+        expression { params.SELECT_CHOICE == "apply"}
       }
       steps {
         dir('app_infra') {
