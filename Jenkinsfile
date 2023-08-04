@@ -1,3 +1,5 @@
+def userId = slackUserIdFromEmail('fahriddin24@gmail.com')
+
 pipeline {
   agent any
   parameters {
@@ -56,10 +58,10 @@ pipeline {
     stage('notify-slack') {
       steps {
         script {
-              slackSend(color: "good", message: " Mustafa's jenkins_pipeline passed successfully")
+              slackSend(color: "good", message: " Hey <@$userId> ! Pipeline GitHubIntegrate-2 passed successfully :tada:" )
         }
       }
     }
-    
+
   }
 }
