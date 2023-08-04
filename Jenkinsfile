@@ -1,4 +1,6 @@
-def userId = slackUserIdFromEmail('fahriddin24@gmail.com')
+def userId_cto = slackUserIdFromEmail('fahriddin24@gmail.com')
+def userId_admin1 = slackUserIdFromEmail('tuba_7655@icloud.com')
+def userId_admin2 = slackUserIdFromEmail('Burkanov.es@gmail.com')
 
 pipeline {
   agent any
@@ -32,7 +34,7 @@ pipeline {
       steps {
         dir('app_infra') {
           echo "Running terraform fmt"
-          sh 'terraform fmt'
+          sh 'terraform fmttt'
         }
       }
     }
@@ -59,7 +61,11 @@ pipeline {
   post ('Post Actions') {
     success {
       echo '### Send Slack Notification ###'
-      slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's 'Pipeline GitHubIntegrate-2' passed successfully :tada:" )
-      }
+      slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's 'Pipeline GitHubIntegrate-2' status 'success' :tada:" )
+    }
+    failure {
+      echo '### Send Slack Notification ###'
+      slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's 'Pipeline GitHubIntegrate-2' status 'failure' :scream: , Please Troubleshoot!" )
+    }
   }
 }
