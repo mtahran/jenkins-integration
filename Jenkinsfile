@@ -81,5 +81,9 @@ pipeline {
       echo '### Send Slack Notification ###'
       slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's 'Pipeline GitHubIntegrate-2' status 'failure' :scream: , Please Troubleshoot!" )
     }
+    always {
+      echo '### Clean Workspace ###'
+      cleanWs()
+    }
   }
 }
