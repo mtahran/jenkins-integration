@@ -13,9 +13,6 @@ pipeline {
   }
   stages{
     stage('tf-init') {
-      when {
-        expression { params.SELECT_CHOICE == "apply"}
-      }
       steps {
         dir('app_infra') {
           echo "Running terraform init"
@@ -51,7 +48,21 @@ pipeline {
       }
     }
 
-    stage('tf-action') {
+    stage('tf-apply') {
+      when {
+        expression { params.SELECT_CHOICE == "apply"}
+      }
+      steps {
+        dir('app_infra') {
+          echo "Running terraform ${params.SELECT_CHOICE}"
+          sh "terraform ${params.SELECT_CHOICE} --auto-approve"
+        }
+      }
+    }
+    stage('tf-destroy') {
+      when {
+        expression { params.SELECT_CHOICE == "destroy"}
+      }
       steps {
         dir('app_infra') {
           echo "Running terraform ${params.SELECT_CHOICE}"
