@@ -51,13 +51,15 @@ pipeline {
           sh "terraform ${params.SELECT_CHOICE} --auto-approve"
         }
       }
-      post {
-        success {
-            script {
-              slackSend color: 'good', message: "Mustafa's job was successful! :tada:"
-            }
+    }
+
+    stage('notify-slack') {
+      steps {
+        script {
+              slackSend(color: "good", message: " Mustafa's jenkins_pipeline passed successfully")
         }
       }
     }
+    
   }
 }
