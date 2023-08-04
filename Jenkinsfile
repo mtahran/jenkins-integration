@@ -13,6 +13,9 @@ pipeline {
   }
   stages{
     stage('tf-init') {
+      when {
+        branch 'main'
+      }
       steps {
         dir('app_infra') {
           echo "Running terraform init"
@@ -34,7 +37,7 @@ pipeline {
       steps {
         dir('app_infra') {
           echo "Running terraform fmt"
-          sh 'terraform fmttt'
+          sh 'terraform fmt'
         }
       }
     }
