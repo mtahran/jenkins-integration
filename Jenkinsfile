@@ -87,35 +87,33 @@ pipeline {
         }
       }
   
+      // options { 
+      //   quietPeriod(60) 
+      // }
   
-    
-      options { 
-        quietPeriod(60) 
-      }
-  
-      stage('ssh_to_app_server') {
+      // stage('ssh_to_app_server') {
   
   
-      }
+      // }
   
-      stage('install_nginx') {
+      // stage('install_nginx') {
   
         
-      }
+      // }
   
-      post ('Post Actions') {
-        success {
-          echo '### Send Slack Notification ###'
-          slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's Pipeline - Deployment status 'success' :tada:" )
-        }
-        failure {
-          echo '### Send Slack Notification ###'
-          slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's Pipeline - Deployment status 'failure' :scream: , Please Troubleshoot!" )
-        }
-        always {
-          echo '### Clean Workspace ###'
-          cleanWs()
-        }
-      }
+      // post ('Post Actions') {
+      //   success {
+      //     echo '### Send Slack Notification ###'
+      //     slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's Pipeline - Deployment status 'success' :tada:" )
+      //   }
+      //   failure {
+      //     echo '### Send Slack Notification ###'
+      //     slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's Pipeline - Deployment status 'failure' :scream: , Please Troubleshoot!" )
+      //   }
+      //   always {
+      //     echo '### Clean Workspace ###'
+      //     cleanWs()
+      //   }
+      // }
     }  
 }  
