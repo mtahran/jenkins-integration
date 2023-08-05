@@ -92,6 +92,16 @@ pipeline {
         }
       }
 
+      stage('SSH Remote-host') {
+        when {
+          expression { params.SELECT_CHOICE == "apply" }
+        }
+        steps {
+            sleep(time: 2, unit: 'MINUTES')
+            sh 'ssh -o StrictHostKeyChecking=accept-new -tt ec2-user@${IP_ADDR} "sudo yum install nginx -y" ; "sudo systemctl start nginx"'
+        }
+      }
+
       // post ('Post Actions') {
       //   success {
       //     echo '### Send Slack Notification ###'
