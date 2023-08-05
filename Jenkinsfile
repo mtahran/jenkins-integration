@@ -55,12 +55,16 @@ pipeline {
             dir('app_infra') {
               echo "Running terraform ${params.SELECT_CHOICE}"
               sh "terraform ${params.SELECT_CHOICE} --auto-approve"
-              sh """terraform output instance_private_ip | tr -d '"' """
+              script {
+                def tf_output = sh(returnStdout: true, script: """terraform output instance_private_ip | tr -d '"' """)
+                env.IP_ADDR = "${tf_output}"
+                echo "${env.IP_ADDR}"
+              }
             }
           }
         }
       }
-      
+
       stage('tf-destroy') {
         when {
           expression { params.SELECT_CHOICE == "destroy"}
