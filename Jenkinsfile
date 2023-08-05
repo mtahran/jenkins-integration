@@ -69,7 +69,7 @@ pipeline {
         }
       }
     
-      stage(notify-infrabuild) {
+      stage('notify-infrabuild') {
         steps {
           slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's infrabuild status: 'success' :tada:" )
         }
