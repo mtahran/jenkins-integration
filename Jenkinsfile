@@ -72,20 +72,20 @@ pipeline {
       }
     
     
-      post ('Post Actions') {
-        success {
-          echo '### Send Slack Notification ###'
-          slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's Pipeline - Infra Creation status: 'success' :tada:" )
-        }
-        failure {
-          echo '### Send Slack Notification ###'
-          slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's Pipeline - Infra Creation status: 'failure' :scream: , Please Troubleshoot!" )
-        }
-        always {
-          echo '### Clean Workspace ###'
-          cleanWs()
-        }
-      }
+      // post ('Post Actions') {
+      //   success {
+      //     echo '### Send Slack Notification ###'
+      //     slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's Pipeline - Infra Creation status: 'success' :tada:" )
+      //   }
+      //   failure {
+      //     echo '### Send Slack Notification ###'
+      //     slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's Pipeline - Infra Creation status: 'failure' :scream: , Please Troubleshoot!" )
+      //   }
+      //   always {
+      //     echo '### Clean Workspace ###'
+      //     cleanWs()
+      //   }
+      // }
   
       // options { 
       //   quietPeriod(60) 
