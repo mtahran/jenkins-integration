@@ -1,6 +1,4 @@
-def userId_cto = slackUserIdFromEmail('fahriddin24@gmail.com')
-def userId_admin1 = slackUserIdFromEmail('tuba_7655@icloud.com')
-def userId_admin2 = slackUserIdFromEmail('Burkanov.es@gmail.com')
+def userId = slackUserIdFromEmail('mutahran@gmail.com')
   
 pipeline {
     agent any
@@ -71,7 +69,12 @@ pipeline {
         }
       }
     
-    
+      stage(notify-infrabuild) {
+        steps {
+          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's infrabuild status: 'success' :tada:" )
+        }
+      }
+
       // post ('Post Actions') {
       //   success {
       //     echo '### Send Slack Notification ###'
