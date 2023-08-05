@@ -1,7 +1,7 @@
 variable "jenkins_server_ip" {
   description = "CIDR of the office"
   type        = list(string)
-  default = [ "18.234.241.223" ]
+  default = [ "18.234.241.223/32" ]
 }
 
 variable "key_name" {
