@@ -17,7 +17,7 @@ resource "aws_instance" "app_server" {
     instance_type = "t2.micro"
     key_name               = var.key_name
     subnet_id              = values(data.aws_subnet.subnet_id)[0].id
-    vpc_security_group_ids = [aws_security_group.app_server.id]
+    vpc_security_group_ids = [aws_security_group.sg_app_server.id]
     tags = {
       Name = "app_server"
   }
