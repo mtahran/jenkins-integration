@@ -54,6 +54,7 @@ pipeline {
           dir('app_infra') {
             echo "Running terraform ${params.SELECT_CHOICE}"
             sh "terraform ${params.SELECT_CHOICE} --auto-approve"
+            sh "terraform output"
           }
         }
       }
