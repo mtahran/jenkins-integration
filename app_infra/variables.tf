@@ -6,7 +6,7 @@ variable "jenkins_server_ip" {
 variable "http_cidr_block" {
   description = "CIDR of the jenkins server"
   type        = list(string)
-  default = [ "98.227.136.153/32/32","209.122.40.225/32" ]
+  default = [ "98.227.136.153/32","209.122.40.225/32" ]
 }
 variable "key_name" {
   description = "ssh key of my laptop"
