@@ -44,7 +44,7 @@ resource "aws_security_group_rule" "ingress_ssh" {
   security_group_id = aws_security_group.sg_app_server.id
 }
 
-resource "aws_security_group_rule" "ingress_ssh" {
+resource "aws_security_group_rule" "ingress_http" {
   type              = "ingress"
   from_port         = 80
   to_port           = 80
