@@ -98,7 +98,7 @@ pipeline {
         }
         steps {
             sleep(time: 2, unit: 'MINUTES')
-            sh sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
+            sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
         }
       }
 
