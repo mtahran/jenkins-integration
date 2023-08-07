@@ -97,7 +97,7 @@ pipeline {
           expression { params.SELECT_CHOICE == "apply" }
         }
         steps {
-            sleep(time: 2, unit: 'MINUTES')
+            sleep(time: 1, unit: 'MINUTES')
             sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
         }
       }
@@ -116,21 +116,6 @@ pipeline {
       //     cleanWs()
       //   }
       // }
-  
-      // options { 
-      //   quietPeriod(60) 
-      // }
-  
-      // stage('ssh_to_app_server') {
-  
-  
-      // }
-  
-      // stage('install_nginx') {
-  
-        
-      // }
-  
       // post ('Post Actions') {
       //   success {
       //     echo '### Send Slack Notification ###'

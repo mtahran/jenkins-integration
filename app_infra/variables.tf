@@ -11,7 +11,7 @@ variable "http_cidr_block" {
 variable "key_name" {
   description = "ssh key of jenkins server"
   type        = string
-  default = "ubuntu@jenkins"
+  default = "jenkins@jenkins"
 }
 
 variable "sg_name" {
