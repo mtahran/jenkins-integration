@@ -58,7 +58,7 @@ resource "aws_security_group_rule" "ingress_https" {
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
-  cidr_blocks       = var.jenkins_server_ip
+  cidr_blocks       = data.aws_vpc.default_vpc.cidr_block
   security_group_id = aws_security_group.sg_app_server.id
 }
 
