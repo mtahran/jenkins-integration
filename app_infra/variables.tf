@@ -1,8 +1,8 @@
-variable "defult_VPC_cidr_block" {
-  description = "CIDR of the jenkins server"
-  type        = list(string)
-  default = data.aws_vpc.default_vpc.cidr_block
-}
+# variable "defult_VPC_cidr_block" {
+#   description = "CIDR of the jenkins server"
+#   type        = list(string)
+#   default = data.aws_vpc.default_vpc.cidr_block
+# }
 variable "http_cidr_block" {
   description = "CIDR of home and office"
   type        = list(string)

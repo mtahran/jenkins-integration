@@ -40,7 +40,7 @@ resource "aws_security_group_rule" "ingress_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = var.defult_VPC_cidr_block
+  cidr_blocks       = data.aws_vpc.default_vpc.cidr_block
   security_group_id = aws_security_group.sg_app_server.id
 }
 
