@@ -1,7 +1,7 @@
 variable "jenkins_server_ip" {
-  description = "CIDR of the jenkins server, home and office"
+  description = "CIDR of the jenkins server"
   type        = list(string)
-  default = [ "172.31.35.188/32", "98.227.136.153/32","209.122.40.225/32" ]
+  default = [ "172.31.35.188/32"]
 }
 variable "http_cidr_block" {
   description = "CIDR of home and office"

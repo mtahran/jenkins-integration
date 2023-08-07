@@ -8,12 +8,12 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-2"
+  region = "us-east-1"
 }
 
 
 resource "aws_instance" "app_server" {
-    ami           = "ami-02a89066c48741345"  #us-east-2, Amazon Linux
+    ami           = "ami-053b0d53c279acc90"  #us-east-1, Ubuntu
     instance_type = "t2.micro"
     key_name               = var.key_name
     subnet_id              = values(data.aws_subnet.subnet_id)[0].id
