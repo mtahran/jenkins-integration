@@ -1,7 +1,7 @@
-variable "jenkins_server_ip" {
+variable "defult_VPC_cidr_block" {
   description = "CIDR of the jenkins server"
   type        = list(string)
-  default = [ "172.31.35.188/32"]
+  default = data.aws_vpc.default_vpc.cidr_block
 }
 variable "http_cidr_block" {
   description = "CIDR of home and office"

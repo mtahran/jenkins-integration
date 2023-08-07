@@ -77,11 +77,11 @@ pipeline {
         }
       }
     
-      stage('notify-infrabuild') {
-        steps {
-          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's infrabuild status: 'success' :tada:" )
-        }
-      }
+      // stage('notify-infrabuild') {
+      //   steps {
+      //     slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's infrabuild status: 'success' :tada:" )
+      //   }
+      // }
 
       stage('read-tf-output') {
         steps {
