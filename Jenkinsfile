@@ -90,9 +90,9 @@ pipeline {
         }
       }
 
-      stage('notify-infrabuild') {
+      stage('notify-app_build') {
         steps {
-          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's App-build run successfully ! :tada:" )
+          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's App_build run successfully ! :tada:" )
         }
       }
 
@@ -107,34 +107,19 @@ pipeline {
           }
         }
       }
-
-      post ('Post Actions') {
-        success {
-          echo '### Send Slack Notification ###'
-          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline run succesfully ! :tada:" )
-        }
-        failure {
-          echo '### Send Slack Notification ###'
-          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline failed ! :scream: , Please Troubleshoot!" )
-        }
-        always {
-          echo '### Clean Workspace ###'
-          cleanWs()
-        }
+    }
+    post ('Post Actions') {
+      success {
+        echo '### Send Slack Notification ###'
+        slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline run succesfully ! :tada:" )
       }
-      // post ('Post Actions') {
-      //   success {
-      //     echo '### Send Slack Notification ###'
-      //     slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's Pipeline - Deployment status 'success' :tada:" )
-      //   }
-      //   failure {
-      //     echo '### Send Slack Notification ###'
-      //     slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's Pipeline - Deployment status 'failure' :scream: , Please Troubleshoot!" )
-      //   }
-      //   always {
-      //     echo '### Clean Workspace ###'
-      //     cleanWs()
-      //   }
-      // }
-    }  
+      failure {
+        echo '### Send Slack Notification ###'
+        slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline failed ! :scream: , Please Troubleshoot!" )
+      }
+      always {
+        echo '### Clean Workspace ###'
+        cleanWs()
+      }
+    }
 }  
