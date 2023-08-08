@@ -2,6 +2,9 @@ def userId = slackUserIdFromEmail('mutahran@gmail.com')
   
 pipeline {
     agent any
+    options {
+      timeout(time: 1 , unit:'MINUTES' )
+    }
     parameters {
       choice(
         choices: ['apply' , 'destroy'],
@@ -83,15 +86,15 @@ pipeline {
       //   }
       // }
 
-      stage('SSH Remote-host') {
-        when {
-          expression { params.SELECT_CHOICE == "apply" }
-        }
-        steps {
-            sleep(time: 2, unit: 'MINUTES')
-            sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
-        }
-      }
+      // stage('SSH Remote-host') {
+      //   when {
+      //     expression { params.SELECT_CHOICE == "apply" }
+      //   }
+      //   steps {
+      //       sleep(time: 2, unit: 'MINUTES')
+      //       sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
+      //   }
+      // }
 
       stage('notify-app_build') {
         when {
