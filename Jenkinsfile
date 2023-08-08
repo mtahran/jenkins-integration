@@ -66,6 +66,9 @@ pipeline {
       }
     
       stage('notify-infrabuild') {
+        when {
+          expression { params.SELECT_CHOICE == "apply"}
+        }
         steps {
           slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Infra built successfully ! :tada:" )
         }
@@ -91,8 +94,11 @@ pipeline {
       }
 
       stage('notify-app_build') {
+        when {
+          expression { params.SELECT_CHOICE == "apply"}
+        }
         steps {
-          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's App_build run successfully ! :tada:" )
+          slackSend(color: "good", message: " Hey <@$userId> ! Your App_build run successfully ! :tada:" )
         }
       }
 
@@ -107,15 +113,24 @@ pipeline {
           }
         }
       }
+      stage('notify-tf-destroy') {
+        when {
+          expression { params.SELECT_CHOICE == "destroy"}
+        }
+        steps {
+          slackSend(color: "good", message: " Hey <@$userId> ! Your Infra_destroy run successfully ! :tada:" )
+        }
+      }
     }
+
     post ('Post Actions') {
       success {
         echo '### Send Slack Notification ###'
-        slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline run succesfully ! :tada:" )
+        slackSend(color: "good", message: " Hey <@$userId> ! Your Pipeline run succesfully ! :tada:" )
       }
       failure {
         echo '### Send Slack Notification ###'
-        slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline failed ! :scream: , Please Troubleshoot!" )
+        slackSend(color: "good", message: " Hey <@$userId> ! Your Pipeline failed ! :scream: , Please Troubleshoot!" )
       }
       always {
         echo '### Clean Workspace ###'
