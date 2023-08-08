@@ -64,6 +64,37 @@ pipeline {
           }
         }
       }
+    
+      stage('notify-infrabuild') {
+        steps {
+          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Infra built successfully ! :tada:" )
+        }
+      }
+
+      // stage('read-tf-output') {
+      //   steps {
+      //     script {
+      //         // Reading the Terraform output from the environment variable in stage "tf-apply"
+      //         echo "The Terraform output in stage tf-apply is: ${IP_ADDR}"
+      //     }
+      //   }
+      // }
+
+      stage('SSH Remote-host') {
+        when {
+          expression { params.SELECT_CHOICE == "apply" }
+        }
+        steps {
+            sleep(time: 2, unit: 'MINUTES')
+            sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
+        }
+      }
+
+      stage('notify-infrabuild') {
+        steps {
+          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's App-build run successfully ! :tada:" )
+        }
+      }
 
       stage('tf-destroy') {
         when {
@@ -76,46 +107,21 @@ pipeline {
           }
         }
       }
-    
-      // stage('notify-infrabuild') {
-      //   steps {
-      //     slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's infrabuild status: 'success' :tada:" )
-      //   }
-      // }
 
-      stage('read-tf-output') {
-        steps {
-          script {
-              // Reading the Terraform output from the environment variable in stage "tf-apply"
-              echo "The Terraform output in stage tf-apply is: ${IP_ADDR}"
-          }
+      post ('Post Actions') {
+        success {
+          echo '### Send Slack Notification ###'
+          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline run succesfully ! :tada:" )
+        }
+        failure {
+          echo '### Send Slack Notification ###'
+          slackSend(color: "good", message: " Hey <@$userId> ! Mustafa's Pipeline failed ! :scream: , Please Troubleshoot!" )
+        }
+        always {
+          echo '### Clean Workspace ###'
+          cleanWs()
         }
       }
-
-      stage('SSH Remote-host') {
-        when {
-          expression { params.SELECT_CHOICE == "apply" }
-        }
-        steps {
-            sleep(time: 1, unit: 'MINUTES')
-            sh 'ssh -o StrictHostKeyChecking=accept-new -tt ubuntu@${IP_ADDR} "sudo apt install nginx -y"'
-        }
-      }
-
-      // post ('Post Actions') {
-      //   success {
-      //     echo '### Send Slack Notification ###'
-      //     slackSend(color: "good", message: " Hey <@$userId_cto> ! Mustafa's Pipeline - Infra Creation status: 'success' :tada:" )
-      //   }
-      //   failure {
-      //     echo '### Send Slack Notification ###'
-      //     slackSend(color: "good", message: " Hey <@$userId_admin1> and <@$userId_admin2> ! Mustafa's Pipeline - Infra Creation status: 'failure' :scream: , Please Troubleshoot!" )
-      //   }
-      //   always {
-      //     echo '### Clean Workspace ###'
-      //     cleanWs()
-      //   }
-      // }
       // post ('Post Actions') {
       //   success {
       //     echo '### Send Slack Notification ###'
