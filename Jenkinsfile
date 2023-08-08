@@ -4,6 +4,7 @@ pipeline {
     agent any
     options {
       timeout(time: 1 , unit:'MINUTES' )
+      ansiColor('xterm')
     }
     parameters {
       choice(
