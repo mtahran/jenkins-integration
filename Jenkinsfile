@@ -3,7 +3,6 @@ def userId = slackUserIdFromEmail('mutahran@gmail.com')
 pipeline {
     agent any
     options {
-      timeout(time: 1 , unit:'MINUTES' ),
       ansiColor('xterm')
     }
     parameters {
